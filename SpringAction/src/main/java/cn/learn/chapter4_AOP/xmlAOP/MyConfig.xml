@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="audience" class="cn.learn.chapter4_AOP.xmlAOP.Audience"/>
+    <bean id="audience2" class="cn.learn.chapter4_AOP.xmlAOP.Audience2"/>
+    <bean id="countNum" class="cn.learn.chapter4_AOP.xmlAOP.CountNum"/>
+    <aop:config>
+<!--        <aop:aspect ref="audience">
+            <aop:before pointcut="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))" method="silenceCellPhone"/>
+            <aop:before pointcut="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))" method="takeSeats"/>
+            <aop:after-returning pointcut="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))" method="applause"/>
+            <aop:after-throwing pointcut="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))" method="demandRefund"/>
+        </aop:aspect>-->
+        <!--pointcut 定义命名切点-->
+<!--        <aop:aspect ref="audience">
+            <aop:pointcut id="performance" expression="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))"/>
+            <aop:before method="silenceCellPhone" pointcut-ref="performance"/>
+            <aop:before method="takeSeats" pointcut-ref="performance"/>
+            <aop:after-returning method="applause" pointcut-ref="performance"/>
+            <aop:after-throwing method="demandRefund" pointcut-ref="performance"/>
+        </aop:aspect>-->
+       <!-- 环绕通知-->
+<!--        <aop:aspect ref="audience2">
+            <aop:pointcut id="performance" expression="execution(* cn.learn.chapter4_AOP.annotationAOP.Performance.performance(..)))"/>
+            <aop:around method="watchPerformance" pointcut-ref="performance"/>
+        </aop:aspect>-->
+        <aop:aspect ref="countNum">
+            <aop:pointcut id="addNum" expression="execution(* cn.learn.chapter4_AOP.annotationAOP.parameter.Add.addNum(int )) and args(num)"/>
+            <aop:before method="count" pointcut-ref="addNum"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

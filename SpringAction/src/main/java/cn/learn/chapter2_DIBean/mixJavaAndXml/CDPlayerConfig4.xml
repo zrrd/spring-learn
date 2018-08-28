@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--在xml里面引用其他Spring xml配置-->
+    <import resource="classpath:cn/learn/chapter2_DIBean/xmlConfig/CDPlayConfig2.xml"/>
+    <!--这样定义了以后，能在这个xml里面引用其他java配置文件中已经配置好的bean-->
+    <bean class="cn.learn.chapter2_DIBean.autowired.CDPlayerConfig"/>
+</beans>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    如果没有给bean加id的话，Spring默认为cn.learn.chapter2_DIBean.autowired.PopularCd#0 #0为技术器，
+    区别相同Class的文件-->
+    <bean id="compactDisc" class="cn.learn.chapter2_DIBean.autowired.PopularCd">
+
+    </bean>
+    <!--通过构造器注入 引入了c命名空间 用ref来引用其他bean-->
+    <bean id="cdPlay" class="cn.learn.chapter2_DIBean.xmlConfig.CDPlayer" c:cd-ref="compactDisc">
+        <!--<constructor-arg ref="compactDisc"/>-->
+    </bean>
+    <!--通过构造器注入 引入了c命名空间 直接添加值-->
+    <bean id="blankDisc" class="cn.learn.chapter2_DIBean.xmlConfig.BlankDisc" c:title="ppp" c:artist="hhh" >
+    </bean>
+
+    <!--如果有用到list的话，就不能用c命名空间构造函数了，还是要原来的方式-->
+    <bean id="blankDisc1" class="cn.learn.chapter2_DIBean.xmlConfig.BlankDisc">
+        <constructor-arg value="ffff"/>
+        <constructor-arg value="eeee"/>
+        <constructor-arg>
+            <list>
+                <value>aa</value>
+                <value>bb</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!--设值注入-->
+    <bean id="cdPlay1" class="cn.learn.chapter2_DIBean.xmlConfig.CDPlayer" p:cd-ref="compactDisc">
+
+    </bean>
+
+    <bean id="blankDisc2" class="cn.learn.chapter2_DIBean.xmlConfig.BlankDisc">
+        <property name="artist" value="ad"/>
+        <property name="title" value="cd"/>
+        <property name="tracks">
+            <list>
+                <value>aa</value>
+                <value>bb</value>
+                <value>cc</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--将list单独抽出  util还有其他很多  自己查api-->
+<!--    <bean id="list">
+        <util:list id="trackList">
+            <value>aa</value>
+            <value>bb</value>
+            <value>cc</value>
+        </util:list>
+    </bean>-->
+
+ <!--   <bean id="blankDisc3" class="cn.learn.chapter2_DIBean.xmlConfig.BlankDisc"
+          p:artist="aa"
+          p:title="bb"
+          p:tracks-ref="list"/>-->
+
+</beans>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.learn.spitter.dao.SpitterDao">
+  <insert id="saveSpitter" parameterType="Spitter">
+    INSERT INTO spitters (spr_username,spr_password,spr_firstName,spr_lastName)
+    VALUES (#{username},#{password},#{firstName},#{lastName})
+    /*在插入后将id回填到Spitter*/
+    <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <resultMap id="spitter" type="Spitter">
+    <id column="spr_id" property="id"/>
+    <result column="spr_firstName" property="firstName"/>
+    <result column="spr_lastName" property="lastName"/>
+    <result column="spr_username" property="username"/>
+    <result column="spr_password" property="password"/>
+  </resultMap>
+  <select id="getSpitterByUsername" resultMap="spitter" parameterType="String">
+    SELECT *
+    FROM spitters
+    WHERE spr_username = #{username}
+  </select>
+</mapper>

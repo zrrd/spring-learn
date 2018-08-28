@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<body>
+<div id="loginInfor">
+    <form>
+        <div>
+            <label>
+                用户名
+                <input type="text" name="username" v-model="username"/>
+            </label>
+            <label>
+                密码
+                <input type="text" name="password" v-model="password"/>
+            </label>
+            <input v-on:click="login"  type="button" value="提交"/>
+        </div>
+    </form>
+    <section >
+        <label>登录信息</label>
+        <div> {{infor}} </div>
+    </section>
+</div>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript">
+    var login = new Vue({
+        el:"#loginInfor",
+        data :{
+            infor:"",
+            username:"",
+            password:""
+        },
+        methods:{
+            login:function () {
+                var that = this;
+                var url = "/test/login/"+this.username+"/"+this.password;
+                axios.get(url).then(function (reponse) {
+                    that.infor = reponse.data;
+                })
+            }
+        }
+    })
+</script>
+</html>
