@@ -7,6 +7,13 @@
   <groupId>cn.learn</groupId>
   <artifactId>Spring</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>SpringAction</module>
+    <module>SpringAop</module>
+    <module>SpringWeb</module>
+  </modules>
 
 
 </project>

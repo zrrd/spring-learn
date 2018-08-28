@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+Spring.iml
+SpringAction/.idea/
+SpringAction/target/
+SpringAop/.idea/
+SpringAop/src/main/java/cn/learn/dao/
+SpringAop/src/main/java/cn/learn/pojo/dto/
+SpringAop/src/main/java/cn/learn/test/
+SpringAop/target/
+SpringWeb/.idea/
