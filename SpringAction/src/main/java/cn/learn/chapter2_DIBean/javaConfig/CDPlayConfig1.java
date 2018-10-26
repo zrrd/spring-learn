@@ -42,8 +42,7 @@ public class CDPlayConfig1 {
   }
 
   /**
-   * 请求一个CompactDisc作为参数，当Spring调用cdPlayer1()创建CDPlayBean的时候 .
-   * 自动装配一个CompactDisc到方法中，Spring自己找CompactDisc类型的Bean
+   * 请求一个CompactDisc作为参数，当Spring调用cdPlayer1()创建CDPlayBean的时候 . 自动装配一个CompactDisc到方法中，Spring自己找CompactDisc类型的Bean
    */
   @Bean(name = "cdPlayer1")
   public CDPlayer cdPlayer1(CompactDisc compactDisc) {
