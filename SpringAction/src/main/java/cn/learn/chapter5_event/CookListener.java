@@ -4,9 +4,7 @@ import cn.learn.chapter5_event.cooker.Cooker;
 import cn.learn.chapter5_event.dish.Dish;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +12,16 @@ import org.springframework.stereotype.Component;
  * 专门的 点菜监听器.
  *
  * <p>
- * 也可以写通用的监听器 在onApplicationEvent中用 instanceof 匹配
+ * 也可以写通用的监听器 在onApplicationEvent中用 instanceof 匹配 可以继承ApplicationListener
+ * 也可以在事件上添加EventListener注解来实现.
  * </p>
- *
- * 可以继承ApplicationListener  也可以在事件上添加EventListener注解来实现
  *
  * @author 邵益炯
  * @date 2018/10/26
  */
 @Data
 @Component
-public class CookListener  {
+public class CookListener {
 
   private List<Cooker> cookers;
 
@@ -32,8 +29,11 @@ public class CookListener  {
     this.cookers = new ArrayList<>();
   }
 
+  /**
+   * EventListener注解 代替继承ApplicationListener  好处是可以自己取名字.
+   */
   @EventListener
-  public void linstenCook(CookEvent event) {
+  public void listenCook(CookEvent event) {
     Dish dish = event.getDish();
     System.out.println("收到订单" + dish.getDishName() + dish.getDishPrice());
     //判断给哪个师傅做

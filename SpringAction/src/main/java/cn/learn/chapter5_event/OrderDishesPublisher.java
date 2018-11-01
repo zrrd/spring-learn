@@ -1,15 +1,12 @@
 package cn.learn.chapter5_event;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /**
- * 点菜发布
+ * 点菜发布.
  *
  * <p>
  * 该类实现ApplicationContextAware接口,得到ApplicationContext对象,使用该对象的publishEvent方法发布事件.
@@ -22,8 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderDishesPublisher {
 
+  private final ApplicationEventPublisher applicationEventPublisher;
+
   @Autowired
-  private ApplicationEventPublisher applicationEventPublisher;
+  public OrderDishesPublisher(ApplicationEventPublisher applicationEventPublisher) {
+    this.applicationEventPublisher = applicationEventPublisher;
+  }
 
 
   void publishEvent(ApplicationEvent event) {

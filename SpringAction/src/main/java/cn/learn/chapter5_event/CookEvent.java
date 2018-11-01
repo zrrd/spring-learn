@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationEvent;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CookEvent extends ApplicationEvent {
+class CookEvent extends ApplicationEvent {
 
   private Dish dish;
 
@@ -22,7 +22,7 @@ public class CookEvent extends ApplicationEvent {
    *
    * @param source the object on which the event initially occurred (never {@code null})
    */
-  public CookEvent(Object source) {
+  CookEvent(Object source) {
     super(source);
     dish = (Dish) source;
   }
