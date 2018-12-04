@@ -36,7 +36,7 @@ public class CookListener {
   public void listenCook(CookEvent event) {
     Dish dish = event.getDish();
     System.out.println("收到订单" + dish.getDishName() + dish.getDishPrice());
-    //判断给哪个师傅做
+    //判断给哪个师傅做  每个师傅能做大菜品不一样
     String type = dish.getDishType();
     cookers.forEach(c -> {
       String className = c.getClass().getName();

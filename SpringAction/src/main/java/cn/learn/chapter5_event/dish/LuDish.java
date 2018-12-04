@@ -1,7 +1,7 @@
 package cn.learn.chapter5_event.dish;
 
 /**
- * 鲁菜
+ * 鲁菜.
  *
  * @author 邵益炯
  * @date 2018/10/26
