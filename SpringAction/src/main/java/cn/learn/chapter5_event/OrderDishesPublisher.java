@@ -27,7 +27,7 @@ public class OrderDishesPublisher {
   }
 
 
-  void publishEvent(ApplicationEvent event) {
+  void publishEvent(CookEvent event) {
     applicationEventPublisher.publishEvent(event);
   }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,8 +32,11 @@ public class CookListener {
 
   /**
    * EventListener注解 代替继承ApplicationListener  好处是可以自己取名字.
+   * order 定义监听器执行顺序
+   * classes = CookEvent.class 定义需要那些事件需要被监听
    */
-  @EventListener
+  @Order(value = 1)
+  @EventListener(classes = CookEvent.class)
   public void listenCook(CookEvent event) {
     Dish dish = event.getDish();
     System.out.println("收到订单" + dish.getDishName() + dish.getDishPrice());
