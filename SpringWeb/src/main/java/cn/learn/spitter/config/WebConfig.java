@@ -13,8 +13,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -64,11 +62,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
    */
   @Bean("messageSource")
   public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
-    ReloadableResourceBundleMessageSource messageSource =
-        new ReloadableResourceBundleMessageSource();
-    /**
-     * 引入外部的错误信息 resource下
-     * */
+    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    //引入外部的错误信息 resource下
     messageSource.setBasenames("ValidationMessages");
     messageSource.setDefaultEncoding("UTF-8");
     messageSource.setCacheSeconds(120);

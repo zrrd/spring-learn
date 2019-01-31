@@ -19,22 +19,22 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 /**
  * 相当于一个web应用的上下文配置 web.xml
- * */
+ *
+ * @author syj
+ */
 public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   /**
-   * 返回Servlet监听器，ContextLoaderListener
-   * 用来加载应用中的其他bean 相当于一个applicationContext.xml配置
-   * */
+   * 返回Servlet监听器，ContextLoaderListener 用来加载应用中的其他bean 相当于一个applicationContext.xml配置
+   */
   @Override
   protected Class<?>[] getRootConfigClasses() {
     return new Class<?>[]{RootConfig.class};
   }
 
   /**
-   * 返回DispatcherServlet用来加载web组件的bean 控制器(controller)   视图解析器     处理器映射
-   * 相当于dispatcher-servlet.xml
-   * */
+   * 返回DispatcherServlet用来加载web组件的bean 控制器(controller)   视图解析器     处理器映射 相当于dispatcher-servlet.xml
+   */
   @Override
   protected Class<?>[] getServletConfigClasses() {
     return new Class<?>[]{WebConfig.class};
@@ -51,7 +51,7 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
   /**
    * 给DispatcherServlet添加额外配置
-   * */
+   */
   @Override
   protected void customizeRegistration(ServletRegistration.Dynamic registration) {
     registration.setMultipartConfig(new MultipartConfigElement("E:\\tmp", 4194304, 8388608, 0));
@@ -59,9 +59,8 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
 
   /**
-   * 给web应用添加过滤器，处理乱码问题
-   * 编码过滤器
-   * */
+   * 给web应用添加过滤器，处理乱码问题 编码过滤器
+   */
   @Override
   protected Filter[] getServletFilters() {
     return new Filter[]{new CharacterEncodingFilter("UTF-8")};

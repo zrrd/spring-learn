@@ -39,7 +39,7 @@ public class LoggerAdvice {
     System.out.println("aa");
     logger.info(now.toString() + "执行[" + requestLog.logDescription() + "]开始");
     logger.info(joinPoint.getSignature().toString());
-    logger.info(parseParames(joinPoint.getArgs()));
+    logger.info(parseParams(joinPoint.getArgs()));
 
   }
 
@@ -57,13 +57,13 @@ public class LoggerAdvice {
     logger.error(now.toString() + "执行 [" + requestLog.logDescription() + "] 异常", ex);
   }
 
-  private String parseParames(Object[] parames) {
-    if (null == parames || parames.length <= 0) {
+  private String parseParams(Object[] params) {
+    if (null == params || params.length <= 0) {
       return "";
     }
     StringBuilder param = new StringBuilder("传入参数 # 个:[ ");
     int i = 0;
-    for (Object obj : parames) {
+    for (Object obj : params) {
       i++;
       if (i == 1) {
         param.append(obj.toString());

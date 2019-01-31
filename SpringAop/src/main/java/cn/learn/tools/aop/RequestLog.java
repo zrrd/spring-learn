@@ -14,5 +14,8 @@ import java.lang.annotation.Target;
 @Documented
 public @interface RequestLog {
 
+  /**
+   * 描述接口意义
+   */
   String logDescription();
 }

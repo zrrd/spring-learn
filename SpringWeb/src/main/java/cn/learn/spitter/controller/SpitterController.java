@@ -6,6 +6,7 @@ import cn.learn.spitter.pojo.po.Spitter;
 import cn.learn.spitter.service.SpitterService;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * .
+ *
  * @author shaoyijong
  */
 
+@SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping("/spitter")
 public class SpitterController {
 
+  private final SpitterService spitterService;
+
   @Autowired
-  SpitterService spitterService;
+  public SpitterController(SpitterService spitterService) {
+    this.spitterService = spitterService;
+  }
 
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -39,11 +46,12 @@ public class SpitterController {
     return "registerForm";
   }
 
+  /**
+   * 重定向
+   */
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String processRegisteration(@Valid SpitterDto spitterDto, Errors errors) {
-    /**
-     * 校验表单SpitterDto  errors是否校验成功
-     * */
+  public String processRegistration(@Valid SpitterDto spitterDto, Errors errors) {
+    //校验表单SpitterDto  errors是否校验成功
     if (errors.hasErrors()) {
       return "registerForm";
     }
@@ -63,10 +71,6 @@ public class SpitterController {
   }
 
   /**
-   * 下面是web试图渲染的内容
-   * */
-
-  /**
    * 为了让Spring标签绑定一个模型对象，需要在模型中有一个对象，key和commandName对应.
    */
   @RequestMapping(value = "/register2", method = RequestMethod.GET)
@@ -77,8 +81,11 @@ public class SpitterController {
     return "registerForm2";
   }
 
+  /**
+   * 重定向到表单
+   */
   @RequestMapping(value = "/register2", method = RequestMethod.POST)
-  public String processRegisteration2(@Valid SpitterDto spitterDto, Errors errors) {
+  public String processRegistration2(@Valid SpitterDto spitterDto, Errors errors) {
     if (errors.hasErrors()) {
       //验证失败 返回registerForm2 表单内的数据保持不变
       return "registerForm2";
@@ -105,10 +112,10 @@ public class SpitterController {
    */
   @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
   public String upload(@RequestPart("profilePicture") byte[] profilePicture) {
-
-/*         接受到文件后会存到MultipartConfigElement所定义目录下
-         名字为upload_0ca564de_4c0a_4827_b87f_a24dc6a73f29_00000000.tmp*/
-
+    //通过字节流上传文件会通过base64编码  如果需要得到原来的文件的话 用base64解码
+    byte[] bytes = Base64.getDecoder().decode(profilePicture);
+    //接受到文件后会存到MultipartConfigElement所定义目录下
+    //名字为upload_0ca564de_4c0a_4827_b87f_a24dc6a73f29_00000000.tmp
     return null;
   }
 
@@ -154,7 +161,7 @@ public class SpitterController {
    * 给重定向请求添加参数
    */
   @RequestMapping(value = "/register3", method = RequestMethod.POST)
-  public String processRegisteration3(@Valid SpitterDto spitterDto, Errors errors, Model model) {
+  public String processRegistration3(@Valid SpitterDto spitterDto, Errors errors, Model model) {
     if (errors.hasErrors()) {
       return "registerForm2";
     }
@@ -173,7 +180,7 @@ public class SpitterController {
    * 给重定向请求添加参数2
    */
   @RequestMapping(value = "/register3", method = RequestMethod.POST)
-  public String processRegisteration3(@Valid SpitterDto spitterDto, Errors errors,
+  public String processRegistration3(@Valid SpitterDto spitterDto, Errors errors,
       RedirectAttributes model) {
     if (errors.hasErrors()) {
       return "registerForm2";
