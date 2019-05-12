@@ -19,20 +19,18 @@ import org.springframework.stereotype.Component;
 public class LoggerAdvice {
 
   private static Logger logger = Logger.getLogger(LoggerAdvice.class);
+
   /**
+   * <pre>
    * arg() @arg() 指定参数
    * execution() 执行方法
    * this()
    * target @target 指定对象 指定注解
    * within() @within() 匹配指定类型  concert.* 意思是concert下的任意类
-   *  @annotation 有指定注解
-   * */
-
-  /**
    * 下面before的意思是TestController类下的有requestLog注解的方法 joinPoint 连接点 这里是指Aop下的方法 获得该切点的所有参数并且打印
+   * @ annotation 有指定注解
+   * </pre>
    */
-
-
   @Before("within(cn.learn.controller.*) && @annotation(requestLog)")
   public void addBeforeLogger(JoinPoint joinPoint, RequestLog requestLog) {
     LocalDateTime now = LocalDateTime.now();
@@ -43,6 +41,9 @@ public class LoggerAdvice {
 
   }
 
+  /**
+   * 执行结束后
+   */
   @AfterReturning(pointcut = "within(cn.learn.controller.*) && @annotation(requestLog)", returning = "returnValue")
   public void afterLogger(JoinPoint joinPoint, RequestLog requestLog, Object returnValue) {
     LocalDateTime now = LocalDateTime.now();
