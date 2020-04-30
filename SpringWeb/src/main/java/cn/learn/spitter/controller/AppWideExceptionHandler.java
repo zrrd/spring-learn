@@ -28,6 +28,7 @@ public class AppWideExceptionHandler {
   /**
    * 异常处理器. 可以决定拦截哪些异常 ResponseStatus可以决定今日该异常后返回请求的状态码 ;
    * <p>还可以自己订定义返回类型 , 可以使用 @ResponseBody 注解 , 返回 json 请求</p>
+   * <p>ExceptionHandler 需要拦截的异常</p>
    */
   @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler(Exception.class)
