@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
@@ -25,12 +26,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AppWideExceptionHandler {
 
   /**
-   * 异常处理器. 可以决定拦截哪些异常 ResponseStatus可以决定今日该异常后返回请求的状态码
+   * 异常处理器. 可以决定拦截哪些异常 ResponseStatus可以决定今日该异常后返回请求的状态码 ;
+   * <p>还可以自己订定义返回类型 , 可以使用 @ResponseBody 注解 , 返回 json 请求</p>
    */
   @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler(Exception.class)
-  public void exceptionHandler(Exception e) {
+  @ResponseBody
+  public String exceptionHandler(Exception e) {
     e.printStackTrace();
+    return "请求失败";
   }
 
   /**
@@ -78,7 +82,6 @@ public class AppWideExceptionHandler {
   /**
    * <p>把值绑定到Model中，使全局@RequestMapping可以获取到该值</p>
    * <p>每个返回中都有 counter 与 uri 属性 记录了每个路径的访问次数</p>
-   *
    */
   @ModelAttribute
   public void modelAttribute(HttpServletRequest request, Model model) {
